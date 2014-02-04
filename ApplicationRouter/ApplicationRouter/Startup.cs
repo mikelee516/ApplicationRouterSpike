@@ -18,7 +18,8 @@ namespace ApplicationRouter
             var baseAddress = string.Format("http://localhost:{0}/", port);
 
             var startup = Container.Resolve<Startup>();
-            IDisposable webApplication = WebApp.Start(baseAddress, startup.Configuration);
+            //IDisposable webApplication = WebApp.Start(baseAddress, startup.Configuration);
+            IDisposable webApplication = WebApp.Start("http://*:" + port, startup.Configuration);
             
             try
             {

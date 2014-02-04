@@ -11,7 +11,9 @@ namespace ApplicationRouter.Models
 
         protected bool Equals(Endpoint other)
         {
-            return string.Equals(Name, other.Name) && string.Equals(Version, other.Version) && string.Equals(URL, other.URL);
+            return string.Equals(Name, other.Name) 
+                && string.Equals(Version, other.Version) 
+                && string.Equals(URL, other.URL);
         }
 
         public override int GetHashCode()

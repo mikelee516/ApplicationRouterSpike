@@ -40,21 +40,24 @@ namespace ApplicationRouter.Repositories
                     Name = er.EndPoint, 
                     URL = er.Url,
                     Version = er.Version
-                }).ToArray();
+                })
+                .Distinct()
+                .ToArray();
         }
 
-        public virtual Endpoint Get(string endpointName, DateTime cutoffTime)
+        public virtual IEnumerable<Endpoint> Get(string endpointName, DateTime cutoffTime)
         {
-            var result = _context.EndpointRegistrations
-                .Single(er => er.EndPoint == endpointName 
-                    && er.RegistrationTime > cutoffTime);
-
-            return new Endpoint
+            return _context.EndpointRegistrations
+                .Where(er => er.EndPoint == endpointName 
+                    && er.RegistrationTime > cutoffTime)
+                .Select(er => new Endpoint
                 {
-                    Name = result.EndPoint,
-                    URL = result.Url,
-                    Version = result.Version
-                };
+                    Name = er.EndPoint,
+                    URL = er.Url,
+                    Version = er.Version
+                })
+                .Distinct()
+                .ToArray();
         }
     }
 }

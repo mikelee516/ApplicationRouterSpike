@@ -1,5 +1,6 @@
 ﻿using ApplicationRouter.Data;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Web.Http;
 using ApplicationRouter.Repositories;
@@ -19,13 +20,13 @@ namespace ApplicationRouter.Controllers
         // GET api/endpoints 
         public IEnumerable<Endpoint> Get()
         {
-            return _repository.GetAll(DateTime.Now.AddHours(-1));
+            return _repository.GetAll(DateTime.Now.AddMinutes(-5));
         }
 
         // GET api/endpoints/SomeEndpointName 
-        public Endpoint Get(string id)
+        public IEnumerable<Endpoint> Get(string id)
         {
-            return _repository.Get(id, DateTime.Now.AddHours(-1));
+            return _repository.Get(id, DateTime.Now.AddMinutes(-5));
         }
 
         // POST api/endpoints 

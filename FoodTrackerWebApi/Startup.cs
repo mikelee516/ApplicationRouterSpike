@@ -11,6 +11,7 @@ namespace FoodTrackerWebApi
     public class Startup
     {
         private static readonly IUnityContainer Container = UnityBootstrap.GetConfiguredContainer();
+        private static EndpointRegistrationWorker _backgroundWorker;
 
         public static void StartServer()
         {
@@ -18,15 +19,21 @@ namespace FoodTrackerWebApi
             var baseAddress = string.Format("http://localhost:{0}/", port);
 
             var startup = Container.Resolve<Startup>();
-            IDisposable webApplication = WebApp.Start(baseAddress, startup.Configuration);
+            //IDisposable webApplication = WebApp.Start(baseAddress, startup.Configuration);
+            IDisposable webApplication = WebApp.Start("http://*:" + port, startup.Configuration);
+
+            _backgroundWorker = new EndpointRegistrationWorker();
+            _backgroundWorker.RunWorkerAsync();
 
             try
             {
-                Console.WriteLine("Started...");
+                Console.WriteLine("Started on " + baseAddress);
                 Console.ReadKey();
             }
             finally
             {
+                if (_backgroundWorker.IsBusy)
+                    _backgroundWorker.CancelAsync();
                 webApplication.Dispose();
             }
         }
@@ -55,5 +62,6 @@ namespace FoodTrackerWebApi
             appBuilder.UseWebApi(config);
         }
 
+        
     }
 }
