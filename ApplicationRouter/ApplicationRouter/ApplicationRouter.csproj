@@ -145,7 +145,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\EndpointController.cs" />
+    <Compile Include="Controllers\EndpointsController.cs" />
     <Compile Include="Models\Endpoint.cs" />
     <Compile Include="Data\AppRouterContext.cs">
       <AutoGen>True</AutoGen>
@@ -154,7 +154,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\EndpointRegistrationRepository.cs" />
+    <Compile Include="Repositories\EndpointRegistrationsRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UnityBootstrap.cs" />
     <Compile Include="UnityResolver.cs" />

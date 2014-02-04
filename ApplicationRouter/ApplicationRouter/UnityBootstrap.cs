@@ -29,8 +29,6 @@ namespace ApplicationRouter
                 new InjectionConstructor(
                         "Name=AppRouterContext"
                     ));
-            unityContainer.RegisterType<EndpointRegistrationRepository>();
-            unityContainer.RegisterType<EndpointController>();
         }
     }
 }

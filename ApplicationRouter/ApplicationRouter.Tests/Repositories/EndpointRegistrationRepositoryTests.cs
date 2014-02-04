@@ -28,7 +28,7 @@ namespace ApplicationRouter.Tests.Repositories
         public void ShouldRegisterANewEndpoint()
         {
             _context.Stub(c => c.EndpointRegistrations).Return(_endpointRegistrations);
-            var repository = new EndpointRegistrationRepository(_context);
+            var repository = new EndpointRegistrationsRepository(_context);
 
             var registerMe = new Endpoint { Name = "SomeName", URL="htp://localhost", Version = "v1.0.0.1"};
             repository.Add(registerMe);
@@ -47,7 +47,7 @@ namespace ApplicationRouter.Tests.Repositories
         public void ShouldThrowAnExceptionIfTheRegistrationIsIncomplete(string endpointName, string url, string version)
         {
             var registration = new Endpoint {Name = endpointName, URL = url, Version = version};
-            var repository = new EndpointRegistrationRepository(_context);
+            var repository = new EndpointRegistrationsRepository(_context);
             Assert.Throws<ArgumentException>(() => repository.Add(registration));
         }
 
