@@ -145,7 +145,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\EndpointRegistrationController.cs" />
+    <Compile Include="Controllers\EndpointController.cs" />
     <Compile Include="Models\Endpoint.cs" />
     <Compile Include="Data\AppRouterContext.cs">
       <AutoGen>True</AutoGen>

@@ -30,7 +30,7 @@ namespace ApplicationRouter
                         "Name=AppRouterContext"
                     ));
             unityContainer.RegisterType<EndpointRegistrationRepository>();
-            unityContainer.RegisterType<EndpointRegistrationController>();
+            unityContainer.RegisterType<EndpointController>();
         }
     }
 }
