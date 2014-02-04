@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FoodTrackerWebApi.Repositories
 {
@@ -28,6 +26,9 @@ namespace FoodTrackerWebApi.Repositories
 
         public void Add(Models.User addMe)
         {
+            if(string.IsNullOrWhiteSpace(addMe.Name))
+                throw new ArgumentException("User.Name is null or blank.");
+
             if (_context.Users.Any(f => f.Name == addMe.Name))
                 throw new ArgumentException(string.Format("User [{0}] already exists in the system.", addMe.Name));
 

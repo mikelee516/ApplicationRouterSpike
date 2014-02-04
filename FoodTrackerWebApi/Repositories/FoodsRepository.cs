@@ -28,6 +28,9 @@ namespace FoodTrackerWebApi.Repositories
 
         public void Add(Models.Food addMe)
         {
+            if (string.IsNullOrWhiteSpace(addMe.Name))
+                throw new ArgumentException(string.Format("Food.Name is null or blank.", addMe.Name));
+
             if (_context.Foods.Any(f => f.Name == addMe.Name))
                 throw new ArgumentException(string.Format("Food [{0}] already exists in the system.", addMe.Name));
 

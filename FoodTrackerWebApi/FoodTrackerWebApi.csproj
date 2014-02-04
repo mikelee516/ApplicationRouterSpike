@@ -120,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\FoodsController.cs" />
+    <Compile Include="Controllers\MealsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Data\FoodTracker.cs">
       <AutoGen>True</AutoGen>
@@ -132,6 +133,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\FoodsRepository.cs" />
+    <Compile Include="Repositories\MealsRepository.cs" />
     <Compile Include="Repositories\UsersRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UnityBootstrap.cs" />

@@ -10,5 +10,6 @@ namespace FoodTrackerWebApi.Models
     {
         public User User { get; set; }
         public Food Food { get; set; }
+        public DateTime Time { get; set; }
     }
 }

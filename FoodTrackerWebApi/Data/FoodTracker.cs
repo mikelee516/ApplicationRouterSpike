@@ -94,8 +94,8 @@ namespace FoodTrackerWebApi.Data
     public class Meal
     {
         public int Id { get; set; } // Id (Primary key)
-        public int UserId { get; set; } // UserId
-        public int FoodId { get; set; } // FoodId
+        public string User { get; set; } // User
+        public string Food { get; set; } // Food
         public DateTime Time { get; set; } // Time
     }
 
@@ -132,8 +132,8 @@ namespace FoodTrackerWebApi.Data
             HasKey(x => x.Id);
 
             Property(x => x.Id).HasColumnName("Id").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(x => x.UserId).HasColumnName("UserId").IsRequired();
-            Property(x => x.FoodId).HasColumnName("FoodId").IsRequired();
+            Property(x => x.User).HasColumnName("User").IsRequired().HasMaxLength(256);
+            Property(x => x.Food).HasColumnName("Food").IsRequired().HasMaxLength(256);
             Property(x => x.Time).HasColumnName("Time").IsRequired();
         }
     }
