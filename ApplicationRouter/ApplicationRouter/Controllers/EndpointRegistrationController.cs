@@ -1,15 +1,20 @@
 ﻿using ApplicationRouter.Data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
+using ApplicationRouter.Repositories;
 
 namespace ApplicationRouter.Controllers
 {
     public class EndpointRegistrationController : ApiController
     {
+        private readonly EndpointRegistrationRepository _repository;
+
+        public EndpointRegistrationController(EndpointRegistrationRepository repository)
+        {
+            _repository = repository;
+        }
+
         // GET api/values 
         public IEnumerable<EndpointRegistration> Get()
         {

@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationRouter", "ApplicationRouter\ApplicationRouter.csproj", "{8F2AAA6B-75C8-4C1E-B355-7DB61E3EAE0A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{6376FB7F-3695-4CF9-82E8-A6698ACD4E2B}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationRouter.Tests", "ApplicationRouter.Tests\ApplicationRouter.Tests.csproj", "{1E5F48E1-24B6-4137-9F89-44A4C5A58E34}"
 EndProject
 Global

@@ -1,20 +1,33 @@
-﻿using ApplicationRouter.Data;
+﻿using System;
+using ApplicationRouter.Data;
+using ApplicationRouter.Models;
 
 namespace ApplicationRouter.Repositories
 {
     public class EndpointRegistrationRepository
     {
-        private IAppRouterContext _context;
+        private readonly IAppRouterContext _context;
 
-        public EndpointRegistrationRepository(Data.IAppRouterContext _context)
+        public EndpointRegistrationRepository(IAppRouterContext context)
         {
-            // TODO: Complete member initialization
-            this._context = _context;
+            _context = context;
         }
 
-        public void Add(Models.Endpoint registerMe)
+        public void Add(Endpoint registerMe)
         {
-            throw new System.NotImplementedException();
+            if(string.IsNullOrWhiteSpace(registerMe.Name)
+                || string.IsNullOrWhiteSpace(registerMe.URL)
+                || string.IsNullOrWhiteSpace(registerMe.Version))
+                throw new ArgumentException(string.Format("The endpoint registration is missing data: {0}", registerMe));
+
+            _context.EndpointRegistrations.Add(
+                new EndpointRegistration{
+                    EndPoint = registerMe.Name, 
+                    Url = registerMe.URL,
+                    Version = registerMe.Version
+                });
+
+            _context.SaveChanges();
         }
     }
 }
