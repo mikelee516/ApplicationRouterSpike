@@ -29,8 +29,7 @@ namespace ApplicationRouter.Data
     // Unit of work
     public interface IAppRouterContext : IDisposable
     {
-        IDbSet<Endpoint> Endpoints { get; set; } // Endpoints
-        IDbSet<Registration> Registrations { get; set; } // Registrations
+        IDbSet<EndpointRegistration> EndpointRegistrations { get; set; } // EndpointRegistrations
 
         int SaveChanges();
     }
@@ -39,8 +38,7 @@ namespace ApplicationRouter.Data
     // Database context
     public class AppRouterContext : DbContext, IAppRouterContext
     {
-        public IDbSet<Endpoint> Endpoints { get; set; } // Endpoints
-        public IDbSet<Registration> Registrations { get; set; } // Registrations
+        public IDbSet<EndpointRegistration> EndpointRegistrations { get; set; } // EndpointRegistrations
 
         static AppRouterContext()
         {
@@ -64,14 +62,12 @@ namespace ApplicationRouter.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Configurations.Add(new EndpointConfiguration());
-            modelBuilder.Configurations.Add(new RegistrationConfiguration());
+            modelBuilder.Configurations.Add(new EndpointRegistrationConfiguration());
         }
 
         public static DbModelBuilder CreateModel(DbModelBuilder modelBuilder, string schema)
         {
-            modelBuilder.Configurations.Add(new EndpointConfiguration(schema));
-            modelBuilder.Configurations.Add(new RegistrationConfiguration(schema));
+            modelBuilder.Configurations.Add(new EndpointRegistrationConfiguration(schema));
             return modelBuilder;
         }
     }
@@ -79,22 +75,8 @@ namespace ApplicationRouter.Data
     // ************************************************************************
     // POCO classes
 
-    // Endpoints
-    public class Endpoint
-    {
-        public int Id { get; set; } // Id (Primary key)
-        public string Name { get; set; } // Name
-        public string Url { get; set; } // URL
-        public DateTime? RegistrationTimeStamp { get; set; } // RegistrationTimeStamp
-
-        public Endpoint()
-        {
-            RegistrationTimeStamp = System.DateTime.Now;
-        }
-    }
-
-    // Registrations
-    public class Registration
+    // EndpointRegistrations
+    public class EndpointRegistration
     {
         public int Id { get; set; } // Id (Primary key)
         public string EndPoint { get; set; } // EndPoint
@@ -102,7 +84,7 @@ namespace ApplicationRouter.Data
         public string Url { get; set; } // URL
         public DateTime RegistrationTime { get; set; } // RegistrationTime
 
-        public Registration()
+        public EndpointRegistration()
         {
             RegistrationTime = System.DateTime.Now;
         }
@@ -112,27 +94,12 @@ namespace ApplicationRouter.Data
     // ************************************************************************
     // POCO Configuration
 
-    // Endpoints
-    internal class EndpointConfiguration : EntityTypeConfiguration<Endpoint>
+    // EndpointRegistrations
+    internal class EndpointRegistrationConfiguration : EntityTypeConfiguration<EndpointRegistration>
     {
-        public EndpointConfiguration(string schema = "dbo")
+        public EndpointRegistrationConfiguration(string schema = "dbo")
         {
-            ToTable(schema + ".Endpoints");
-            HasKey(x => x.Id);
-
-            Property(x => x.Id).HasColumnName("Id").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(x => x.Name).HasColumnName("Name").IsRequired().HasMaxLength(256);
-            Property(x => x.Url).HasColumnName("URL").IsRequired().HasMaxLength(1024);
-            Property(x => x.RegistrationTimeStamp).HasColumnName("RegistrationTimeStamp").IsOptional();
-        }
-    }
-
-    // Registrations
-    internal class RegistrationConfiguration : EntityTypeConfiguration<Registration>
-    {
-        public RegistrationConfiguration(string schema = "dbo")
-        {
-            ToTable(schema + ".Registrations");
+            ToTable(schema + ".EndpointRegistrations");
             HasKey(x => x.Id);
 
             Property(x => x.Id).HasColumnName("Id").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);

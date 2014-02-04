@@ -147,7 +147,7 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="Controllers\EndpointRegistrationController.cs" />
-    <Compile Include="Model\EndpointRegistration.cs" />
+    <Compile Include="Models\Endpoint.cs" />
     <Compile Include="Data\AppRouterContext.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -155,6 +155,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\EndpointRegistrationRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Unity.SelfHostWebApiOwin\Startup.cs" />
     <Compile Include="Unity.SelfHostWebApiOwin\UnityHelpers.cs" />
@@ -195,6 +196,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
