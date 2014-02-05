@@ -56,10 +56,9 @@ namespace FoodTrackerWebApi
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            // Web API routes
-            //config.MapHttpAttributeRoutes();
-
-            appBuilder.UseWebApi(config);
+            appBuilder
+                .UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll)
+                .UseWebApi(config);
         }
 
         

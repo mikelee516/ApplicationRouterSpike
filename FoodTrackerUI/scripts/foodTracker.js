@@ -2,67 +2,56 @@ var app = angular.module('foodTracker', []);
 
 app.factory('endpointUrlRetriever', ['$http', 
   function($http){
-    return function(endpointContainer){
-    
-      $http
-        .get("http://localhost:50000/api/Endpoints")
-    	  .success(function(data, status, headers, config) {
-      	  // this callback will be called asynchronously
-      	  // when the response is available
-          console.log("loading the endpoint container");
-          endpointContainer = data;
-      	})
-      	.error(function(data, status, headers, config) {
-      	  // called asynchronously if an error occurs
-      	  // or server returns response with an error status.
-          console.log("failure loading the endpoint container");
-          endpointContainer = {};
-      	});
+    return {
+      getEndpointsAsync: function(successCallback, errorCallback){
+        $http
+          .get("http://localhost:50000/api/Endpoints")
+          .success(successCallback)
+          .error(errorCallback);
+      }
     };
 }]);
 
-// app.factory('foodRequestor', function($http){
-//   return function(endpointUrl){
-//     $http({
-//       method: 'GET', 
-//       url: endpointUrl
-//     })
-//     .success(function(data, status, headers, config) {
-//       // this callback will be called asynchronously
-//       // when the response is available
-//       return data;
+app.factory('endpointRequestor', ['$http', 
+  function($http){
+    return {
+      getEndpointDataAsync: function(endpointUrl, successCallback, errorCallback){
+        $http
+          .get(endpointUrl)
+          .success(successCallback)
+          .error(errorCallback);
+        }
+    };
+}]);
 
-//     })
-//     .error(function(data, status, headers, config) {
-//       // called asynchronously if an error occurs
-//       // or server returns response with an error status.
-//       return {};
-//     });
-//   };
-// });
-
-app.controller('FoodTrackerCtrl', ['$scope', 'endpointUrlRetriever', 
-  function($scope, endpointUrlRetriever){
-    $scope.version = "1.0.0.0";
-    //$scope.endpoints = {};
+app.controller('FoodTrackerCtrl', ['$scope', 'endpointUrlRetriever', 'endpointRequestor', 
+  function($scope, endpointUrlRetriever, endpointRequestor){
+    // set the function to get the list of endpoints
     $scope.loadEndpoints = function(){
-      console.log("loadEndpoints");
-      endpointUrlRetriever($scope.endpoints);
-    };
+      endpointUrlRetriever.getEndpointsAsync(
+      function(data, status, headers, config) {
+        console.log("success loading the endpoint container");
+        $scope.endpoints = data;
+      },
+      function(data, status, headers, config) {
+        console.log("error loading the endpoint container");
+        $scope.endpoints = {};
+      }
+    )};
+
+    $scope.getDataFromEndpoint = function(endpoint){
+      console.log("Calling getDataFromEndpoint for " + endpoint);
+      endpointRequestor.getEndpointDataAsync(
+        endpoint.URL,
+        function(data, status, headers, config) {
+          console.log("success loading the endpoint data");
+          $scope.endpointData = data;
+        },
+        function(data, status, headers, config) {
+          console.log("error loading the endpoint data");
+          $scope.endpointData = {};
+        }
+    )};
 
 }]);
 
-app.controller('FoodCtrl', ['$scope', '$http',  
-  function($scope, $http) {
-    var endpoints = {};
-
-    $http.get("http://localhost:50000/api/Endpoints")
-      .success(function(data, status){
-        endpoints = data;
-      })
-      .error(function(data, status){
-        endpoints = {};
-      });
-
-    //$scope.FoodList = foodRequestor(endpointUrl);
-}]);

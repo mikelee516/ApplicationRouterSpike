@@ -10,8 +10,8 @@ GO
 
 CREATE TABLE [dbo].[Meals](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[UserId] [int] NOT NULL,
-	[FoodId] [int] NOT NULL,
+	[User] [varchar](256) NOT NULL,
+	[Food] [varchar](256) NOT NULL,
 	[Time] [datetime] NOT NULL,
  CONSTRAINT [PK_Meals] PRIMARY KEY CLUSTERED 
 (

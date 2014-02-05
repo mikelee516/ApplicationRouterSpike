@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Food Tracker v1.0.0</title>
+  <title>Food Tracker</title>
   <meta name="description" content="FoodTrackerUi">
   <meta name="author" content="Mike Lee">
 
@@ -13,10 +13,40 @@
 
 <div ng-app="foodTracker">
   <div ng-controller="FoodTrackerCtrl">
-    <span>Version v{{version = '1.0.0'}}</span>
-    <button ng-click="loadEndpoints()">Load Endpoints</button>
-    <span ng-repeat="endpoint in endpoints">Name: {{endpoint.Name}}, Version: {{endpoint.Version}}, URL: {{endpoint.URL}}</span>
-    <br/>
+    <div>
+      <button ng-click="loadEndpoints()">Load Endpoints</button>
+    </div>
+    <div>
+      <h3>List of available endpoints</h3>
+      <table>
+        <tbody>
+          <tr ng-repeat="endpoint in endpoints">
+            <td>
+              <ul>
+                <li>Name: {{endpoint.Name}}</li>
+                <li>Version: {{endpoint.Version}}</li>
+                <li>URL: {{endpoint.URL}}</li>
+              </ul>
+            </td>
+            <td>
+              <button ng-click="getDataFromEndpoint(endpoint)">Load Data</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Requested data from the endpoint</h3>
+      <table>
+        <tbody>
+          <tr ng-repeat="dataItem in endpointData">
+            <td>
+              Data: {{dataItem}}}
+            </td>
+          </tr>
+        </tbody>
+      </table>  
+    </div>
   </div>
 </div>
 <body>
