@@ -53,7 +53,9 @@ namespace ApplicationRouter
             // Web API routes
             //config.MapHttpAttributeRoutes();
 
-            appBuilder.UseWebApi(config);
+            appBuilder
+                .UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll)
+                .UseWebApi(config);
         }
 
     }
